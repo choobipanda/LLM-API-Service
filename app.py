@@ -20,8 +20,6 @@ def hello(req: PromptRequest):
             model="gpt-4.1-mini",
             input=req.prompt
         )
-        print("RAW RESPONSE:", resp)
-        return {"input": req.prompt, "llm_output": "TEMP"}
+        return {"input": req.prompt, "llm_output": resp.output_text}
     except Exception as e:
-        print("LLM ERROR:", repr(e))
         raise HTTPException(status_code=500, detail="LLM call failed")
